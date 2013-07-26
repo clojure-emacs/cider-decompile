@@ -57,24 +57,26 @@ enables javap-mode on it.  Input: FN-NAME in format 'my-namespace$my-function'.
 All dashes will be replaced with underscores, the dollar symbol will be
 escaped."
   (let* ((buf-name "*decompiled*")
-   (class-name
-    (replace-regexp-in-string "-" "_"
-      (replace-regexp-in-string "\\$" "\\\\$" fn-name)))
-   (cmd
-    (concat "javap -constants -v -c -classpath `lein classpath` "
-      class-name))
-   (decompiled (shell-command-to-string cmd)))
+         (class-name
+          (replace-regexp-in-string "-" "_"
+                                    (replace-regexp-in-string "\\$" "\\\\$" fn-name)))
+         (cmd
+          (concat "javap -constants -v -c -classpath `lein classpath` "
+                  class-name))
+         (decompiled (shell-command-to-string cmd)))
     (with-current-buffer (get-buffer-create buf-name)
       (point-min)
       (insert decompiled)
       (javap-mode))
     (display-buffer buf-name)))
 
+;;;###autoload
 (defun nrepl-decompile-func (fn-name)
   "Asks for the func name (FN-NAME) in the current namespace.and decompiles."
   (interactive "sFunction: ")
   (nrepl-decompile (concat (nrepl-current-ns) "$" fn-name)))
 
+;;;###autoload
 (defun nrepl-decompile-ns-func (fn-name)
   "Asks for the func name (FN-NAME) in a specific namespace and decompiles it.
 The FN-NAME should be prefixed with the namespace."
