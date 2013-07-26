@@ -1,4 +1,4 @@
-;;; nrepl.el --- decompilation extension for nrepl.el
+;;; nrepl-decompile.el --- decompilation extension for nrepl.el
 
 ;; Copyright © 2013 Dmitry Bushenko
 ;;
