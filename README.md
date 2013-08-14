@@ -46,7 +46,7 @@ If the installation doesn't work try refreshing the package list:
 
 ## Usage
 
-First you have to install javap-mode because it will be used to display JVM-bytecode.
+First you have to install javap-mode because it will be used to display JVM-bytecode. You also need to compile your clojure files to bytecode by running <kbd>lein compile</kbd> on a command prompt inside your project directory.
 
 Next. Since nrepl-decompile depends on nrepl, it has to be installed and running. Start nrepl session like this:
 
