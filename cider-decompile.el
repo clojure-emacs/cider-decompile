@@ -1,12 +1,12 @@
-;;; nrepl-decompile.el --- decompilation extension for nrepl.el
+;;; cider-decompile.el --- decompilation extension for cider
 
 ;; Copyright © 2013 Dmitry Bushenko
 ;;
 ;; Author: Dmitry Bushenko
-;; URL: http://www.github.com/clojure-emacs/nrepl-decompile
+;; URL: http://www.github.com/clojure-emacs/cider-decompile
 ;; Version: 0.0.1
-;; Keywords: languages, clojure, nrepl
-;; Package-Requires: ((nrepl "0.1.7") (javap-mode "9"))
+;; Keywords: languages, clojure, cider
+;; Package-Requires: ((cider "0.1.7") (javap-mode "9"))
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 
 ;;; Commentary:
 
-;; Provides an `nrepl-decompile' command.
+;; Provides an `cider-decompile' command.
 
 ;;; Installation:
 
@@ -39,18 +39,18 @@
 ;; (add-to-list 'package-archives
 ;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;;
-;; M-x package-install nrepl-decompile
+;; M-x package-install cider-decompile
 
 ;;; Usage:
 
-;; M-x nrepl-decompile
+;; M-x cider-decompile
 
 ;;; Code:
 
-(require 'nrepl)
+(require 'cider)
 (require 'javap-mode)
 
-(defun nrepl-decompile (fn-name)
+(defun cider-decompile (fn-name)
   "Decompiles specified function into the java bytecode.
 Opens buffer *decompiled* with the result of decompilation,
 enables javap-mode on it.  Input: FN-NAME in format 'my-namespace$my-function'.
@@ -71,17 +71,17 @@ escaped."
     (display-buffer buf-name)))
 
 ;;;###autoload
-(defun nrepl-decompile-func (fn-name)
+(defun cider-decompile-func (fn-name)
   "Asks for the func name (FN-NAME) in the current namespace.and decompiles."
   (interactive "sFunction: ")
-  (nrepl-decompile (concat (nrepl-current-ns) "$" fn-name)))
+  (cider-decompile (concat (cider-current-ns) "$" fn-name)))
 
 ;;;###autoload
-(defun nrepl-decompile-ns-func (fn-name)
+(defun cider-decompile-ns-func (fn-name)
   "Asks for the func name (FN-NAME) in a specific namespace and decompiles it.
 The FN-NAME should be prefixed with the namespace."
   (interactive "sNamespace/function:  ")
-  (nrepl-decompile (concat (replace-regexp-in-string "\\\/" "$" fn-name))))
+  (cider-decompile (concat (replace-regexp-in-string "\\\/" "$" fn-name))))
 
-(provide 'nrepl-decompile)
-;;; nrepl-decompile.el ends here
+(provide 'cider-decompile)
+;;; cider-decompile.el ends here

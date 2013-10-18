@@ -5,9 +5,9 @@
 `package.el` is the built-in package manager in Emacs 24+. On Emacs 23
 you will need to get [package.el](http://bit.ly/pkg-el23) yourself if you wish to use it.
 
-`nrepl-decompile` is available on both major `package.el` community
+`cider-decompile` is available on both major `package.el` community
 maintained repos -
-[Marmalade](http://marmalade-repo.org/packages/nrepl) and
+[Marmalade](http://marmalade-repo.org/packages/cider) and
 [MELPA](http://melpa.milkbox.net).
 
 If you're not already using Marmalade, add this to your
@@ -29,15 +29,15 @@ For MELPA the code you need to add is:
 (package-initialize)
 ```
 
-And then you can install nREPL with the following command:
+And then you can install CIDER with the following command:
 
-<kbd>M-x package-install [RET] nrepl-decompile [RET]</kbd>
+<kbd>M-x package-install [RET] cider-decompile [RET]</kbd>
 
 or by adding this bit of Emacs Lisp code to your Emacs initialization file(`.emacs` or `init.el`):
 
 ```lisp
-(unless (package-installed-p 'nrepl-decompile))
-  (package-install 'nrepl-decompile))
+(unless (package-installed-p 'cider-decompile))
+  (package-install 'cider-decompile))
 ```
 
 If the installation doesn't work try refreshing the package list:
@@ -48,26 +48,26 @@ If the installation doesn't work try refreshing the package list:
 
 First you have to install javap-mode because it will be used to display JVM-bytecode. You also need to compile your clojure files to bytecode by running <kbd>lein compile</kbd> on a command prompt inside your project directory.
 
-Next. Since nrepl-decompile depends on nrepl, it has to be installed and running. Start nrepl session like this:
+Next. Since cider-decompile depends on cider, it has to be installed and running. Start cider session like this:
 
-<kbd>M-x nrepl-jack-in [RET]</kbd>
+<kbd>M-x cider-jack-in [RET]</kbd>
 
-Let's say, we've got the following namespace in the Clojure project: myns.core. Compile it, pressing in its buffer:
+Let's say, we've got the following namespace in the Clojure project: `myns.core`. Compile it, pressing in its buffer:
 
 <kbd>C-c C-k</kbd>
 
-Switch to this namespace in the nrepl buffer.
+Switch to this namespace in the cider buffer.
 
 ```lisp
 (in-ns 'myns.core)
 ```
 
-Now you may decompile any function in the current namespace using command "nrepl-decompile-func". For instance, if you have function myns.core/main, then you may decompile it like this:
+Now you may decompile any function in the current namespace using command `cider-decompile-func`. For instance, if you have function myns.core/main, then you may decompile it like this:
 
-<kbd>M-x nrepl-decompile-func [RET] main [RET]</kbd>
+<kbd>M-x cider-decompile-func [RET] main [RET]</kbd>
 
-If you want to decompile a function from the other namespaces, you may use command "nrepl-decompile-ns-func". For example, decompiling function myotherns.core/other-main would look like this:
+If you want to decompile a function from the other namespaces, you may use command `cider-decompile-ns-func`. For example, decompiling function myotherns.core/other-main would look like this:
 
-<kbd>M-x nrepl-decompile-ns-func [RET] myotherns.core/other-main [RET]</kbd>
+<kbd>M-x cider-decompile-ns-func [RET] myotherns.core/other-main [RET]</kbd>
 
 After the command was invoked, the buffer *decompiled* apears showing the bytecode of the function.
