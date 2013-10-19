@@ -52,11 +52,13 @@ Next. Since cider-decompile depends on cider, it has to be installed and running
 
 <kbd>M-x cider-jack-in [RET]</kbd>
 
-Let's say, we've got the following namespace in the Clojure project: `myns.core`. Compile it, pressing in its buffer:
+Plugin cider-decompile doesn't compile the functions, you need to do this manually for now (this is the place for future enhancements). Easiest way to compile the whole project is to run the command
 
-<kbd>C-c C-k</kbd>
+```sh
+$ lein jar
+```
 
-Switch to this namespace in the cider buffer.
+Let's say, we've got the following namespace in the Clojure project: `myns.core`. Switch to this namespace in the cider buffer.
 
 ```lisp
 (in-ns 'myns.core)
@@ -71,3 +73,5 @@ If you want to decompile a function from the other namespaces, you may use comma
 <kbd>M-x cider-decompile-ns-func [RET] myotherns.core/other-main [RET]</kbd>
 
 After the command was invoked, the buffer *decompiled* apears showing the bytecode of the function.
+
+Note: you may not decompile variables or macros. Pay attention on what you are decompiling: your function should be defined with `defn`.
