@@ -58,6 +58,8 @@ Plugin cider-decompile doesn't compile the functions, you need to do this manual
 $ lein jar
 ```
 
+Check the target/classes directory: it should contain compiled classes. If the directory is empty -- check your project.clj file. Add `:aot :all` option to it so that leiningen will have to compile ahead-of time all the clojure code.
+
 Let's say, we've got the following namespace in the Clojure project: `myns.core`. Switch to this namespace in the cider buffer.
 
 ```lisp
