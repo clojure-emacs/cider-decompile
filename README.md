@@ -74,6 +74,8 @@ If you want to decompile a function from the other namespaces, you may use comma
 
 <kbd>M-x cider-decompile-ns-func [RET] myotherns.core/other-main [RET]</kbd>
 
+You need to run these commands from one of the buffers belonging to the project. Cider-decompile uses the buffer to get the relative path to target/classes.
+
 After the command was invoked, the buffer *decompiled* apears showing the bytecode of the function.
 
 Note: you may not decompile variables or macros. Pay attention on what you are decompiling: your function should be defined with `defn`.
