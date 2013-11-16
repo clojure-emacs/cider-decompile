@@ -4,7 +4,8 @@
 ;;
 ;; Author: Dmitry Bushenko
 ;; URL: http://www.github.com/clojure-emacs/cider-decompile
-;; Version: 0.0.1
+;; Version: 20131018.1738
+;; X-Original-Version: 0.0.1
 ;; Keywords: languages, clojure, cider
 ;; Package-Requires: ((cider "0.3.0") (javap-mode "9"))
 
@@ -50,31 +51,37 @@
 (require 'cider)
 (require 'javap-mode)
 
-(defun cider-decompile (fn-name)
+(defun cider-decompile (fn-name-raw)
   "Decompiles specified function into the java bytecode.
 Opens buffer *decompiled* with the result of decompilation,
 enables javap-mode on it.  Input: FN-NAME in format 'my-namespace$my-function'.
 All dashes will be replaced with underscores, the dollar symbol will be
 escaped."
-  (let* ((buf-name "*decompiled*")
-         (class-name
-          (replace-regexp-in-string "-" "_"
-                                    (replace-regexp-in-string "\\$" "\\\\$" fn-name)))
-         (cmd
-          (concat "javap -constants -v -c -classpath `lein classpath` "
-                  class-name))
-         (decompiled (shell-command-to-string cmd)))
+  (let* ((fn-name (replace-regexp-in-string "\?" "_QMARK_"
+					    (replace-regexp-in-string "\!" "_BANG_" fn-name-raw)))
+	 (buf-name "*decompiled*")
+	 (class-name
+	  (replace-regexp-in-string "-" "_"
+				    (replace-regexp-in-string "\\$" "\\\\$" fn-name)))
+	 (cmd
+	  (concat "javap -constants -v -c -classpath `lein classpath` "
+		  class-name))
+	 (decompiled (shell-command-to-string cmd)))
     (with-current-buffer (get-buffer-create buf-name)
       (point-min)
       (insert decompiled)
       (javap-mode))
     (display-buffer buf-name)))
 
-;;;###autoload
-(defun cider-decompile-func (fn-name)
-  "Asks for the func name (FN-NAME) in the current namespace.and decompiles."
-  (interactive "sFunction: ")
+(defun cider-decompile-func* (fn-name)
   (cider-decompile (concat (cider-current-ns) "$" fn-name)))
+
+;;;###autoload
+(defun cider-decompile-func ()
+  "Asks for the func name (FN-NAME) in the current namespace.and decompiles."
+  (interactive)
+  (let ((fname (read-string "Function: " (thing-at-point 'symbol))))
+    (cider-decompile-func* fname)))
 
 ;;;###autoload
 (defun cider-decompile-ns-func (fn-name)
