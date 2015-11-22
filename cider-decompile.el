@@ -30,7 +30,7 @@
 
 ;;; Installation:
 
-;; Available as a package in marmalade-repo.org and melpa.milkbox.net.
+;; Available as a package in marmalade-repo.org and melpa.org.
 
 ;; (add-to-list 'package-archives
 ;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -38,7 +38,7 @@
 ;; or
 ;;
 ;; (add-to-list 'package-archives
-;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;              '("melpa" . "https://melpa.org/packages/") t)
 ;;
 ;; M-x package-install cider-decompile
 
