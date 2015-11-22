@@ -8,7 +8,7 @@ you will need to get [package.el](http://bit.ly/pkg-el23) yourself if you wish t
 `cider-decompile` is available on both major `package.el` community
 maintained repos -
 [Marmalade](http://marmalade-repo.org/packages/cider) and
-[MELPA](http://melpa.milkbox.net).
+[MELPA](https://melpa.org/).
 
 If you're not already using Marmalade, add this to your
 `~/.emacs.d/init.el` (or equivalent) and load it with <kbd>M-x eval-buffer</kbd>.
@@ -25,7 +25,7 @@ For MELPA the code you need to add is:
 ```lisp
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 ```
 
